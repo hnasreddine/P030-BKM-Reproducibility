@@ -35,11 +35,15 @@ if manifest_path.is_file():
   if not path.is_file():errors.append('manifest missing: '+rel)
   elif path.stat().st_size != entry['bytes'] or checksum(path)!=entry['sha256']:
    errors.append('manifest mismatch: '+rel)
- actual={p.relative_to(R).as_posix() for p in R.rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix!='.pyc'}
+ # Ignore checkout metadata and ephemeral build artifacts, not scientific sources.
+ ignored_dirs={'.git','.venv','__pycache__','.pytest_cache','.mypy_cache'}
+ actual={p.relative_to(R).as_posix() for p in R.rglob('*')
+        if p.is_file() and not (set(p.relative_to(R).parts) & ignored_dirs)
+        and p.suffix not in {'.pyc','.pyo'} and p.name not in {'.DS_Store'}}
  expected=set(listed)|{'RELEASE_MANIFEST.json','SHA256SUMS.txt'}
  for rel in sorted(actual-expected):errors.append('unmanifested: '+rel)
  for rel in sorted(expected-actual):errors.append('absent: '+rel)
- if m.get('version')!='1.0.0':errors.append('version mismatch')
+ if m.get('version')!='1.0.1':errors.append('version mismatch')
  sha_path=R/'SHA256SUMS.txt'
  if sha_path.is_file():
   lines=sha_path.read_text().splitlines()
@@ -48,13 +52,13 @@ if manifest_path.is_file():
   else:
    for rel,digest in pairs.items():
     if digest!=listed[rel]['sha256']:errors.append('SHA256SUMS hash mismatch: '+rel)
-# Publication hygiene: distinguish mathematical verification scripts from IA reports.
+# Exclude unrelated working materials from the scientific archive.
 banned={'AUDIT','history','P030_final_audit'}
 for path in R.rglob('*'):
  if not path.is_file():continue
  if set(path.relative_to(R).parts)&banned:errors.append('internal file in public package: '+str(path.relative_to(R)))
- if path.name in ('AUDIT_FINAL.md','PROMPT_CLAUDE_CODE_P030_AUDIT_FINAL.md',
-                  'README_PUBLISH_FR.md','DATA_AVAILABILITY_FOR_MANUSCRIPT.md'):
+ if path.name in ('AUDIT_FINAL.md','README_PUBLISH_FR.md',
+                  'DATA_AVAILABILITY_FOR_MANUSCRIPT.md') or path.name.startswith('INTERNAL_'):
   errors.append('non-public document included: '+path.name)
 for file in ['REPRODUCIBILITY/exact_m2_certificate/certified_BKM_tight.py',
              'REPRODUCIBILITY/exact_m2_certificate/final_error_budget.py']:
@@ -67,7 +71,7 @@ for file in ['REPRODUCIBILITY/exact_m2_certificate/certified_BKM_tight.py',
    errors.append('omitted grid-printing contribution')
 try:
  meta=json.loads((R/'.zenodo.json').read_text())
- if meta.get('upload_type')!='software' or meta.get('version')!='1.0.0':errors.append('incorrect Zenodo metadata')
+ if meta.get('upload_type')!='software' or meta.get('version')!='1.0.1':errors.append('incorrect Zenodo metadata')
 except Exception as e:errors.append('unreadable Zenodo metadata: '+str(e))
 if errors:
  print('FAILED PUBLIC RELEASE CHECK:')
@@ -75,4 +79,4 @@ if errors:
  sys.exit(1)
 print('PASS: clean public scientific content; required proofs and code present; two original inputs match SHA256')
 print('PASS: all',len(m['files']),'manifest entries and SHA256SUMS checked')
-print('NOTE: this is an offline integrity check, not an actual GitHub release or Zenodo deposition')
+print('Source and manifest integrity verified')

@@ -3,7 +3,7 @@ matrix and its dephased 2x2 excited block. Not a proof certificate."""
 from pathlib import Path
 import sys,mpmath as mp
 sys.path.insert(0,str(Path(__file__).resolve().parent))
-import p030lib_original as L
+import bkm_evaluation as L
 mp.mp.dps=160
 p=Path(__file__).resolve().parent/'out_ideal_m2_lean.txt'
 rows=[[mp.mpf(v) for v in line.split()] for line in p.read_text().splitlines()]

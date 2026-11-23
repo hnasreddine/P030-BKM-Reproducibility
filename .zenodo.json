@@ -1,7 +1,7 @@
 {
   "title": "P030: Memory-Induced Entropic Crossovers in Nonnormal Quantum Decay — Reproducibility Code and Numerical Certificates",
   "upload_type": "software",
-  "description": "Self-contained C++/Python software, canonical 8500-mode input data, numerical tables and computer-assisted verification for an exactly orthogonal m=2 BKM continuum enclosure at one specified parameter point (subject to H1–H5); also includes separately labelled historical numerical experiments. Does not include the unpublished manuscript. Original code and author-owned data BSD-3-Clause.",
+  "description": "C++ and Python source, numerical tables, canonical 8500-mode input data, recorded outputs and mathematical verification programs accompanying Memory-Induced Entropic Crossovers in Nonnormal Quantum Decay: Uniform Reconstruction and BKM Defects. Includes a one-point computer-assisted BKM continuum enclosure with its analytic and arithmetic hypotheses.",
   "creators": [
     {
       "name": "Nasreddine, Hassan",
@@ -16,7 +16,7 @@
     "reproducible numerical verification",
     "certified computation"
   ],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "access_right": "open",
   "license": "BSD-3-Clause"
 }

@@ -1,4 +1,4 @@
-"""P030 independent verification library (clean-room; does not import the V0.3 scripts).
+"""P030 numerical routines for reservoir propagation and entropy evaluation.
 
 Conventions (rotating frame, x = omega - Delta, eps = lambda^2):
   dV/dT = -i D V - eps * int_0^T F(s) V(T-s) ds,   F(s) = int J(x) exp(-i x s) dx,

@@ -4,8 +4,7 @@ ROOT="$(cd "$(dirname "$0")" && pwd)"
 cd "$ROOT"
 bash RUN_PRECOMPUTED.sh
 bash tools/reproduce_certified_point.sh full
-# Independently replay the roundoff instrument, rather than relying only
-# on archived strict.log. This code is the certificate instrument, not an AI audit.
+# Recompute the instrumented floating-point rounding bounds from the canonical input.
 CERT="$ROOT/REPRODUCIBILITY/exact_m2_certificate"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT

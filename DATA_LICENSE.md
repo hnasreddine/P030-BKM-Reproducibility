@@ -1,12 +1,9 @@
-# License and attribution for code and numerical data
+# Data and source license
 
-Author-owned original C++/Python code, generated numeric input data, recorded
-outputs and mathematical documentation included in this public distribution are
-provided under the BSD-3-Clause license in `LICENSE`, subject to any rights of
-third-party software cited in the sources. Third-party packages are dependencies
-and are not distributed as binaries in this archive.
+The original C++/Python code, numerical inputs and recorded outputs, and
+mathematical documentation in this repository are licensed BSD-3-Clause under
+`LICENSE`. External libraries are dependencies and are distributed under their
+respective licenses; this repository does not redistribute those libraries.
 
-Please cite the author (Hassan Nasreddine), the software release version and
-its actual Zenodo DOI after archival publication. The unpublished article,
-private referee correspondence and internal research records are not part
-of this distribution.
+Citation: Hassan Nasreddine, *P030: Reproducibility Code, Data and Single-Point
+BKM Certificate*, version 1.0.1 (see `CITATION.cff` for repository metadata).

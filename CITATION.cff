@@ -1,14 +1,10 @@
 cff-version: 1.2.0
-message: "Please cite this archived software/data release via its Zenodo DOI and cite the associated article separately when available."
+message: "If you use this software and data, cite the version-specific archive and associated scientific article."
 title: "P030: Reproducibility Code, Data and Single-Point BKM Certificate"
 type: software
 authors:
   - family-names: Nasreddine
     given-names: Hassan
     orcid: "https://orcid.org/0009-0001-0339-0978"
-version: "1.0.0"
-keywords:
-  - BKM entropy
-  - Friedrichs model
-  - quantum coherence
-  - computer-assisted proof
+version: "1.0.1"
+repository-code: "https://github.com/hnasreddine/P030-BKM-Reproducibility"

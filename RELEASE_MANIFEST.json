@@ -1,14 +1,13 @@
 {
   "name": "P030-BKM-Reproducibility",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "artifact_type": "public_scientific_software_data_and_numerical_certificates",
   "scope": "exactly orthogonal m=2, lambda=0.05, c=5, N=8500; separate historical SVD runs not certified by this enclosure",
-  "public_status": "complete versioned code/data content; GitHub release and Zenodo DOI not yet created",
   "files": [
     {
       "path": ".github/workflows/verify.yml",
       "bytes": 1264,
-      "sha256": "9781d7376b34ada847cc98a81446b8bd381e0040f47f4622d600874e3c90fbee"
+      "sha256": "8bacbe76fe67c57e1d50362fc74a454b1d6833c0bd54ffee4ffd29271557fd0e"
     },
     {
       "path": ".gitignore",
@@ -17,18 +16,18 @@
     },
     {
       "path": ".zenodo.json",
-      "bytes": 965,
-      "sha256": "32b643c08f92f0a5918b3a979ba48b99a73e20f9dd37aae612fd20bff645d552"
+      "bytes": 926,
+      "sha256": "33e0190124a8f81bda2b4ab62061ea0dee85ee4e650238b864946321cb80bc7b"
     },
     {
       "path": "CITATION.cff",
-      "bytes": 473,
-      "sha256": "5f8576a12fbe6600fbba77f898b85192f81de30269a0ea34fedcaaa19322c78b"
+      "bytes": 429,
+      "sha256": "981654fe5f3bde684bebd697e2d6d7e6d976039f8c923267c2ec9984c543a154"
     },
     {
       "path": "DATA_LICENSE.md",
-      "bytes": 675,
-      "sha256": "2cd1569abb6f8078ca17cc63d1bd1faae4ea1666647e8f1d30159e3b2fa7f437"
+      "bytes": 492,
+      "sha256": "899d2fb4783ea6a65ad8edb8508ecc7ed457b4146dd4119b7bc39c28c3ba8f3f"
     },
     {
       "path": "LICENSE",
@@ -36,19 +35,14 @@
       "sha256": "301fdce74df278ce371419a5a6dc45d0b10730ad4fd51fb259eabdc7aacf07b6"
     },
     {
-      "path": "PUBLISHING_CHECKLIST.md",
-      "bytes": 1436,
-      "sha256": "b2701eafb1e115258a592cd6d70438335d271287ad9438232f2cd3f423a8cc94"
-    },
-    {
       "path": "README.md",
-      "bytes": 3383,
-      "sha256": "d6d410eb8c2b5aa9f1c2ad2825bf265ef7ba013f05485a46b75051f7a68c08f3"
+      "bytes": 2569,
+      "sha256": "b4491501284869266da1cdf0db7e0d88e5f12134b857921ee7fb88ad64792226"
     },
     {
       "path": "REPRODUCIBILITY/README.md",
-      "bytes": 384,
-      "sha256": "b1d20af398a788b1fd05c364a3f8d9ab826c21b99b43bb1c72296d8fb8f1ca23"
+      "bytes": 377,
+      "sha256": "ee93e830485c4c0a063044e5a47e16ba889cf6145d7cee183472188ac0c42892"
     },
     {
       "path": "REPRODUCIBILITY/code/make_figure_nonnormal.py",
@@ -72,8 +66,8 @@
     },
     {
       "path": "REPRODUCIBILITY/code/p030lib.py",
-      "bytes": 20250,
-      "sha256": "a852598981214eb537427c21c54bae20a1cd0eea90c7b71cb8a736c7c3c57d46"
+      "bytes": 20238,
+      "sha256": "72dd6f1cf5631fe2ad558d35dbb134ecebf0d9f9d1ba37be7945c5da7a4ff948"
     },
     {
       "path": "REPRODUCIBILITY/code/t0_selfcheck.py",
@@ -231,34 +225,19 @@
       "sha256": "9e2831f30ea3595377bf1e6931c6caa9dd76821297b8412f5a778b302cbecff1"
     },
     {
-      "path": "REPRODUCIBILITY/exact_m2_certificate/README_FR.md",
-      "bytes": 983,
-      "sha256": "bf2ca4eb9c29f55ecb94f51ca0b34278c9a63dea5f7c5b6845d1310279598914"
-    },
-    {
       "path": "REPRODUCIBILITY/exact_m2_certificate/README_REPRODUCE.md",
       "bytes": 1259,
       "sha256": "943b42e23f2d43abf2977046aa1ed3cfc9862d1510b7a19bb808a7859c25e5a8"
     },
     {
-      "path": "REPRODUCIBILITY/exact_m2_certificate/SHA256_MANIFEST.json",
-      "bytes": 9184,
-      "sha256": "c8e3330803bf907e3805a7c67487a15a3d9b1de0e743030543ce6609d490d417"
-    },
-    {
-      "path": "REPRODUCIBILITY/exact_m2_certificate/audit_input_parser.cpp",
-      "bytes": 1190,
-      "sha256": "5d87697f5af14d536ffdba5e29c68c348ffd498a21f666c72e91e0fd699a3539"
-    },
-    {
-      "path": "REPRODUCIBILITY/exact_m2_certificate/audit_parser_ideal.py",
-      "bytes": 2642,
-      "sha256": "0ae3ec842dc814bb71422685846b8c5599b78f7df9af59b83eb831292a99fb16"
-    },
-    {
       "path": "REPRODUCIBILITY/exact_m2_certificate/bessel_ode_certificate.log",
       "bytes": 1030,
       "sha256": "2662345c14046d1c4c7bbee994512074531d954ce58b71ad0bed695e8c71b6ec"
+    },
+    {
+      "path": "REPRODUCIBILITY/exact_m2_certificate/bkm_evaluation.py",
+      "bytes": 20238,
+      "sha256": "72dd6f1cf5631fe2ad558d35dbb134ecebf0d9f9d1ba37be7945c5da7a4ff948"
     },
     {
       "path": "REPRODUCIBILITY/exact_m2_certificate/certified_BKM_tight.py",
@@ -317,8 +296,8 @@
     },
     {
       "path": "REPRODUCIBILITY/exact_m2_certificate/continuum_proof/README.md",
-      "bytes": 595,
-      "sha256": "07c6630ceb4e1b88665245d98f2d809a56820cd844522527bd4303833a781e5d"
+      "bytes": 519,
+      "sha256": "d9bb6fc768c58b197f723f9f99964fdd0d6bfed974802fc1356184f25ad8b617"
     },
     {
       "path": "REPRODUCIBILITY/exact_m2_certificate/continuum_proof/analytic_bound.py",
@@ -334,16 +313,6 @@
       "path": "REPRODUCIBILITY/exact_m2_certificate/continuum_proof/certified_B_sturm.py",
       "bytes": 1238,
       "sha256": "e029996e15d7c9a98e5cbc73069fc5ee4d6da8776495b8e8e12508a0bcf97952"
-    },
-    {
-      "path": "REPRODUCIBILITY/exact_m2_certificate/continuum_proof/direct_m2_results_reference.json",
-      "bytes": 4627,
-      "sha256": "5b9d126e6cb29cb694ef031bc10e548bd2b97d252789e5e9118af35dc38935d6"
-    },
-    {
-      "path": "REPRODUCIBILITY/exact_m2_certificate/continuum_proof/estimate_actual_Cr.py",
-      "bytes": 1018,
-      "sha256": "1d5f5d8f6975dae41aee98fc2bd2a2797f7f38632333dc257044cf2ce973e4cf"
     },
     {
       "path": "REPRODUCIBILITY/exact_m2_certificate/continuum_proof/exact_moments.py",
@@ -406,19 +375,9 @@
       "sha256": "6d8aa16ef78d9324da4aa67b406158c0549a5ef5a60c948bdaf15279fbe23da7"
     },
     {
-      "path": "REPRODUCIBILITY/exact_m2_certificate/continuum_proof/transfer_to_BKM.py",
-      "bytes": 1578,
-      "sha256": "ba32ce8f70ad933aa76bf794f937ee6585c75d71b19bab4821de5b385851235e"
-    },
-    {
       "path": "REPRODUCIBILITY/exact_m2_certificate/continuum_proof/validated_operator_enclosure.txt",
       "bytes": 572,
       "sha256": "aeed9a1f232ef3bbdfb598e604ae19c527332ad9f50d089edbcd60dff4be9538"
-    },
-    {
-      "path": "REPRODUCIBILITY/exact_m2_certificate/diag_crosscheck.log",
-      "bytes": 243,
-      "sha256": "5ca4ff120666fff36db50bd7faa651ac198bbb3544c1528156137b3cf72c769d"
     },
     {
       "path": "REPRODUCIBILITY/exact_m2_certificate/final_budget.log",
@@ -432,8 +391,8 @@
     },
     {
       "path": "REPRODUCIBILITY/exact_m2_certificate/independent_BKM_diagonalization.py",
-      "bytes": 868,
-      "sha256": "51be14b2e46060863fb9a1835ab99ac97d9878e4c0bac460852a877fec99dc64"
+      "bytes": 866,
+      "sha256": "eca0115843a0e9bcd32005c98fac15c600e3d9087bcbdd0019150ec4a76345b9"
     },
     {
       "path": "REPRODUCIBILITY/exact_m2_certificate/input_005_5_8500.txt",
@@ -451,24 +410,9 @@
       "sha256": "5436938d7f94fcc618b59545d41a447c01647d831b845ef89aea10436c436817"
     },
     {
-      "path": "REPRODUCIBILITY/exact_m2_certificate/lean.stderr.log",
-      "bytes": 52,
-      "sha256": "61927b56e4383b7946b631e67eb5a18e11a8839cf2f3ba8a5086ac41bd1ae3c7"
-    },
-    {
-      "path": "REPRODUCIBILITY/exact_m2_certificate/lean.stdout.log",
-      "bytes": 0,
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-    },
-    {
       "path": "REPRODUCIBILITY/exact_m2_certificate/moments_certificate.log",
       "bytes": 4159,
       "sha256": "0a89332d3b7a2d95f8aa201bba07ad112be0e115e1d65cb85772ecd6dd1fefc9"
-    },
-    {
-      "path": "REPRODUCIBILITY/exact_m2_certificate/monotonicity.log",
-      "bytes": 740,
-      "sha256": "157b4a6384a5dd81a5af3f2fe61a53ca6baefd20947fd8287ff09063648fe2d9"
     },
     {
       "path": "REPRODUCIBILITY/exact_m2_certificate/orthogonal_coefs.txt",
@@ -489,16 +433,6 @@
       "path": "REPRODUCIBILITY/exact_m2_certificate/out_ideal_m2_strict.txt",
       "bytes": 377,
       "sha256": "140f31cbb63ea3969d273ca4e5209d30bad81a66ebe39df82cff6b6f59c5930f"
-    },
-    {
-      "path": "REPRODUCIBILITY/exact_m2_certificate/p030lib_original.py",
-      "bytes": 20250,
-      "sha256": "a852598981214eb537427c21c54bae20a1cd0eea90c7b71cb8a736c7c3c57d46"
-    },
-    {
-      "path": "REPRODUCIBILITY/exact_m2_certificate/package_manifest.py",
-      "bytes": 606,
-      "sha256": "9ce039b0277786b47f324a2b9328546024b054df7587a54048174f58d226d7e9"
     },
     {
       "path": "REPRODUCIBILITY/exact_m2_certificate/parser_ideal.log",
@@ -531,11 +465,6 @@
       "sha256": "98db8a7ba05c0096cb7c9f51da02b45ad84515748fe3144f20e7b2b8a0710f84"
     },
     {
-      "path": "REPRODUCIBILITY/exact_m2_certificate/strict_ideal.log",
-      "bytes": 387,
-      "sha256": "b5bee9d4d5ffad6f086e3d244ef3a4f77d689fd5464fe2a900d27978131dc706"
-    },
-    {
       "path": "REPRODUCIBILITY/exact_m2_certificate/strict_ideal_full.log",
       "bytes": 784,
       "sha256": "bbcf602673d269f77a6bf04286211b064cba956c4cc698b21a8abac1be023f7e"
@@ -556,9 +485,19 @@
       "sha256": "32830a8f846319d8294b50d8a44e68217d4551dc90bbcc858011c050f6c53c17"
     },
     {
+      "path": "REPRODUCIBILITY/exact_m2_certificate/verify_input_parser.cpp",
+      "bytes": 1190,
+      "sha256": "5d87697f5af14d536ffdba5e29c68c348ffd498a21f666c72e91e0fd699a3539"
+    },
+    {
+      "path": "REPRODUCIBILITY/exact_m2_certificate/verify_parser_ideal.py",
+      "bytes": 2646,
+      "sha256": "cc5e520429d05b28a44bf76ceb03de6deaacbe8092d48cf193d93f340ae97627"
+    },
+    {
       "path": "REPRODUCIBILITY/order2_high_precision/RESULTS_AND_LIMITATIONS.md",
-      "bytes": 3952,
-      "sha256": "fee602cda896c774d67f8a6666b1e9fd12dfb9f825431ef147f24bad5f08f6ef"
+      "bytes": 4090,
+      "sha256": "bcb3329be9712e563a00edacd83a7e03368ca405c2cc1a34aaa906d5f5fcf678"
     },
     {
       "path": "REPRODUCIBILITY/order2_high_precision/cheb_dd.cpp",
@@ -607,8 +546,8 @@
     },
     {
       "path": "REPRODUCIBILITY/order2_high_precision/p030lib.py",
-      "bytes": 20250,
-      "sha256": "a852598981214eb537427c21c54bae20a1cd0eea90c7b71cb8a736c7c3c57d46"
+      "bytes": 20238,
+      "sha256": "72dd6f1cf5631fe2ad558d35dbb134ecebf0d9f9d1ba37be7945c5da7a4ff948"
     },
     {
       "path": "REPRODUCIBILITY/order2_high_precision/prep_hp.py",
@@ -627,13 +566,13 @@
     },
     {
       "path": "REPRODUCIBILITY/verify_recorded_budget.sh",
-      "bytes": 236,
-      "sha256": "0ec5bf062daf5743c8738076ada520cbca8f8f3f45e3e7bc18dae6be9965e76d"
+      "bytes": 188,
+      "sha256": "77a1bb5453aa4970635b3dbf80e140506ef0475f3a4e0b55ce6fd7480ff1913b"
     },
     {
       "path": "RUN_EXACT.sh",
-      "bytes": 901,
-      "sha256": "9a7eda0808354d94afc5614f025ac5bfbfc2680be47a8a89596d7b3d4d0b0519"
+      "bytes": 830,
+      "sha256": "bcb6ae4df9652d713ed30c86dfc006504bcd82d33f71960dc81204d547a4231a"
     },
     {
       "path": "RUN_PRECOMPUTED.sh",
@@ -642,38 +581,18 @@
     },
     {
       "path": "docs/LICENSE_SCOPE.md",
-      "bytes": 534,
-      "sha256": "bb66b7213549b62b3224441438827b655bedf9e4875b5527e19c64c54547cb3f"
+      "bytes": 336,
+      "sha256": "80efb5f36557637402f27bb7a6cecf17b6353f081c7ee4fa8dc0198b9cb4b87e"
     },
     {
       "path": "docs/PROOF_MAP.md",
-      "bytes": 2199,
-      "sha256": "b6cf0be76af09c3752120d0f1c33f10fa78c0a62d43c401090b31d225beb3ed1"
-    },
-    {
-      "path": "docs/RELEASE_BOUNDARY.md",
-      "bytes": 1367,
-      "sha256": "2210e3544734ff30f263db0eace73459c27fd76672610c27b9c81d108075bfb2"
-    },
-    {
-      "path": "docs/REPRODUCIBILITY_LEVEL.md",
-      "bytes": 737,
-      "sha256": "392af25230347a9170ac9641d01f664380f2e902cc02c08c2688f46981a030cb"
+      "bytes": 2131,
+      "sha256": "cdfe4d15aa953f2a4e14007a28bebff105885026c9e367b093c17ff0f5c76e46"
     },
     {
       "path": "requirements-tested.txt",
       "bytes": 55,
       "sha256": "eb38f76d3b70ec8085d24e44ce316132b320a102b4e94e712b400ebb26d858d9"
-    },
-    {
-      "path": "tools/create_public_github_repo.sh",
-      "bytes": 1285,
-      "sha256": "ad450e41684f586bcb7e06b29f7513baa7a82b74d5a236bbd27a707da6e72d4e"
-    },
-    {
-      "path": "tools/create_zenodo_release_trigger.sh",
-      "bytes": 1050,
-      "sha256": "08faed56ef98c9b06988940f7475c8de7de168e967a3bace5d626c16ef2c4282"
     },
     {
       "path": "tools/reproduce_certified_point.sh",
@@ -682,8 +601,8 @@
     },
     {
       "path": "tools/verify_release.py",
-      "bytes": 4313,
-      "sha256": "11c859b255fd3e4c36742c4b0054463d19b85ddf0e6d4d7b812a4cf004bdaab4"
+      "bytes": 4478,
+      "sha256": "ce741a1994ee0184fcb10a311fecbf01bd5de8a6bf32bab28aecc0d8eb145879"
     }
   ]
 }

@@ -1,4 +1,4 @@
-# Mathematical proof and executable evidence map (P030, release v1.0.0)
+# Mathematical obligations and executable evidence (P030)
 
 **Exact scope**: the continuum BKM enclosure `3.95299e-41 < Δ < 3.98513e-41`
 for the exactly orthogonal order-two spectral density with λ=0.05, c=5,
@@ -14,14 +14,13 @@ historical rounded-SVD table entries do not inherit this enclosure.
 | Chebyshev/Bessel, parser, double-double error | `PROOF_DD_AND_NUMERICAL_CERTIFICATE_2026-11-22.md` | `cheb_dd_lambda_corrected.cpp`, `strict_dd_audit.cpp`, `certified_bessel_ode.py`, inputs, outputs and `final_error_budget.py` |
 | Positive-kernel BKM enclosure and transfer | `CERTIFICATE_IDEAL_ORDER2_2026-11-22.md` | `certified_BKM_tight.py`, `transfer_ideal_interval.py`, `independent_BKM_diagonalization.py` |
 
-The proof is not mechanically checked (no Lean/Coq/Isabelle); the stated
-trusted base includes IEEE 754 round-to-nearest, correctly rounded FMA,
-non-contracted arithmetic and the implementation of interval/exact libraries.
-A completed numerical replay is not a proof of the underlying inequalities;
-read the derivations as well as running the scripts.
+The arithmetic implementation assumes IEEE 754 round-to-nearest-even,
+correctly rounded FMA, disabled floating-point contraction and the numerical
+properties of the specified exact/interval libraries. The certificate notes
+state the mathematical inequalities and the reproduction scripts compute their
+numerical bounds under these assumptions.
 
 **Fast recorded-value and budget checks**: `bash RUN_PRECOMPUTED.sh`.
 **Full numerical reconstruction**: `bash RUN_EXACT.sh`.
-They are separate routes to reconstruct the calculation; they are not two
-independent formal proofs. For figures and uncertified historical simulations,
+These are two levels of numerical reconstruction. For the separately labeled numerical tables and figures,
 see `REPRODUCIBILITY/code/`, `REPRODUCIBILITY/data/` and `order2_high_precision/`.

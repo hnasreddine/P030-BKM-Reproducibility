@@ -1,1 +1,5 @@
-Reproducibility sources and recorded data accompanying the main article and supplementary numerical material. Scripts preserve the original experiment names and numerical outputs. No numerical datasets have been recomputed or modified during editorial preparation. See the Methods section of the article and the supplemental numerical tables for sampling, precision and conditioning.
+Numerical source and recorded datasets for the accompanying P030 manuscript
+and Supplementary Numerics. The `code/` and `data/` folders support the figures
+and tables. `order2_high_precision/` contains the separately labeled direct
+order-two simulations. `exact_m2_certificate/` contains the exactly orthogonal
+bath and the one-point computer-assisted continuum BKM enclosure.

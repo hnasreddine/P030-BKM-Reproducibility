@@ -8,4 +8,3 @@ shifted grid is `(-1)^k` and cancels under absolute-value bounds.
 The complete single-point BKM enclosure also requires the C++ propagation,
 Bessel interval bounds and positive-kernel integration described in
 `../CERTIFICATE_IDEAL_ORDER2_2026-11-22.md`.
-`estimate_actual_Cr.py` is exploratory and does not form part of the bound.

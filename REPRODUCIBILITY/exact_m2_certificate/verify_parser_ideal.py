@@ -21,9 +21,9 @@ int main(int argc,char**argv){
  fclose(f);
 }
 '''
-(P/'audit_input_parser.cpp').write_text(program)
-subprocess.run(['g++','-O3','-std=c++17','-fno-fast-math','-ffp-contract=off',str(P/'audit_input_parser.cpp'),'-lquadmath','-o',str(P/'audit_input_parser')],check=True)
-p=subprocess.run([str(P/'audit_input_parser'),str(P/'input_005_5_8500_ideal_m2.txt')],text=True,capture_output=True,check=True)
+(P/'verify_input_parser.cpp').write_text(program)
+subprocess.run(['g++','-O3','-std=c++17','-fno-fast-math','-ffp-contract=off',str(P/'verify_input_parser.cpp'),'-lquadmath','-o',str(P/'verify_input_parser')],check=True)
+p=subprocess.run([str(P/'verify_input_parser'),str(P/'input_005_5_8500_ideal_m2.txt')],text=True,capture_output=True,check=True)
 u=Fraction(1,2**53); eps100=Fraction(1,2**100); eta=Fraction(1,10**300)
 mxr=Fraction(0);maxrline='';bad=0; zero_high=0;maxoverlap=Fraction(0); skipped_tiny=0
 for row in p.stdout.splitlines():
