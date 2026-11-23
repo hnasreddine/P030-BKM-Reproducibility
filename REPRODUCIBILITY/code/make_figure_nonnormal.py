@@ -1,8 +1,15 @@
-"""Figure 2 of the manuscript (v0.5): nonnormal Davies generator, entropy and BKM defect versus c."""
+"""Figure 2: nonnormal Davies generator, entropy and BKM defect versus c."""
+import argparse
+from pathlib import Path
 import json, numpy as np, matplotlib
 matplotlib.use('Agg'); import matplotlib.pyplot as plt
+ROOT=Path(__file__).resolve().parent.parent
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--output',type=Path,default=ROOT/'generated'/'figures'/'fig_nonnormal.pdf')
+args=parser.parse_args()
+args.output.parent.mkdir(parents=True,exist_ok=True)
 plt.rcParams.update({'font.size': 8, 'font.family': 'serif', 'axes.linewidth': 0.6, 'lines.linewidth': 1.2, 'mathtext.fontset': 'cm'})
-N2 = json.load(open('../data/testN2_micro.json')); lam = 0.035
+N2 = json.loads((ROOT/'data'/'testN2_micro.json').read_text()); lam = 0.035
 INK, BLUE, ORANGE, GRAY = '#111111', '#0072B2', '#D55E00', '#888888'
 rows = [x for x in N2['rows'] if abs(x['lam']-lam) < 1e-9]
 c = np.array([x['c'] for x in rows]); g = lambda k: np.array([x['pI'][k] for x in rows])
@@ -21,5 +28,5 @@ for a, mic, t1, t2, tot, dav, cth, title, okk in (
     a.grid(True, which='major', lw=0.3, color='#dddddd'); a.set_axisbelow(True)
     a.set_xlabel(r'horizon parameter $c$   ($\tau=c\,\log(1/\lambda)$)')
 ax[0].legend(frameon=False, fontsize=7, loc='lower left')
-fig.tight_layout(); fig.savefig('../paper/fig_nonnormal.pdf'); pass
+fig.tight_layout(); fig.savefig(args.output); plt.close(fig)
 print('ok', int((~ok).sum()), 'unresolved defect points omitted')

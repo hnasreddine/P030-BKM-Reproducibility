@@ -16,7 +16,7 @@
     "reproducible numerical verification",
     "certified computation"
   ],
-  "version": "1.0.1",
+  "version": "1.0.2",
   "access_right": "open",
   "license": "BSD-3-Clause"
 }

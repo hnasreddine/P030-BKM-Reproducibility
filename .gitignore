@@ -9,3 +9,5 @@ cheb_dd
 .env
 .env.*
 .venv/
+
+REPRODUCIBILITY/generated/
