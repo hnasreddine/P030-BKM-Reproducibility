@@ -1,4 +1,4 @@
-name: Confirm Zenodo DOI for P030 v1.0.1
+name: Confirm archived P030 v1.0.1 file and metadata
 on:
   push:
     branches: [main]
@@ -7,40 +7,27 @@ on:
 permissions:
   contents: read
 jobs:
-  check:
+  confirm:
     runs-on: ubuntu-24.04
-    timeout-minutes: 3
+    timeout-minutes: 2
     steps:
-      - name: Query Zenodo public record and search endpoints
-        shell: bash
+      - name: Verify exact public Zenodo record metadata and files
         run: |
           python3 - <<'PY'
-          import urllib.request,urllib.error,urllib.parse,json
-          base='https://zenodo.org'
-          paths=[
-            '/api/records/24456646',
-            '/api/records/24456646/versions',
-            '/api/records?q=P030&size=50',
-            '/api/records?q=P030',
-            '/api/records/?q=P030'
-          ]
-          for path in paths:
-              u=base+path
-              try:
-                  req=urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0 (research verification)','Accept':'application/json'})
-                  with urllib.request.urlopen(req,timeout=15) as response:
-                      body=response.read().decode('utf-8','replace')
-                      status=response.status
-                  print('ZENODO_RESPONSE',path,status,flush=True)
-                  try:
-                      data=json.loads(body)
-                      if isinstance(data.get('hits'),dict):
-                          hits=data['hits'].get('hits',[])
-                          print('ZENODO_RESULTS',json.dumps([{'id':h.get('id'),'doi':h.get('doi'),'version':h.get('metadata',{}).get('version'),'title':h.get('metadata',{}).get('title'),'url':h.get('links',{}).get('self_html')} for h in hits[:30]]),flush=True)
-                      else:
-                          print('ZENODO_RECORD',json.dumps({'id':data.get('id'),'doi':data.get('doi'),'version':data.get('metadata',{}).get('version'),'links':data.get('links'),'versions':data.get('hits',{}).get('hits') if isinstance(data.get('hits'),dict) else None})[:3500],flush=True)
-                  except Exception:print('ZENODO_BODY',body[:1200],flush=True)
-              except urllib.error.HTTPError as exc:
-                  print('ZENODO_HTTP_ERROR',path,exc.code,exc.read().decode('utf-8','replace')[:1000],flush=True)
-              except Exception as exc:print('ZENODO_ERROR',path,type(exc).__name__,str(exc),flush=True)
+          import urllib.request,json
+          url='https://zenodo.org/api/records/24457811'
+          req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 (research verification)','Accept':'application/json'})
+          with urllib.request.urlopen(req,timeout=25) as response: d=json.load(response)
+          m=d.get('metadata',{})
+          files=d.get('files',{}).get('entries',{}) if isinstance(d.get('files'),dict) else d.get('files',[])
+          if isinstance(files,dict):
+              listing=[{'name':k,'size':v.get('size'),'checksum':v.get('checksum')} for k,v in files.items()]
+          else:
+              listing=[{'name':x.get('key'),'size':x.get('size'),'checksum':x.get('checksum')} for x in files]
+          print('ZENODO_VERIFIED_RECORD',json.dumps({'id':d.get('id'),'doi':d.get('doi'),'version':m.get('version'),'title':m.get('title'),'files':listing,'related_identifiers':m.get('related_identifiers',[]),'status':d.get('status')}),flush=True)
+          assert str(d.get('doi'))=='10.5281/zenodo.24457811'
+          assert str(m.get('version'))=='1.0.1'
+          assert 'P030' in m.get('title','')
+          assert listing, 'No archived files provided in Zenodo record'
+          print('P030_ZENODO_24457811_METADATA_FILES_PASS',flush=True)
           PY
