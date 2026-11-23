@@ -1,8 +1,15 @@
-"""Figure 1 of the manuscript: entropy and BKM defect versus the horizon parameter c (m=1 and m=2)."""
+"""Figure 1: entropy and BKM defect versus horizon c (m=1 and m=2)."""
+import argparse
+from pathlib import Path
 import json, numpy as np, matplotlib
 matplotlib.use('Agg'); import matplotlib.pyplot as plt
+ROOT=Path(__file__).resolve().parent.parent
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--output',type=Path,default=ROOT/'generated'/'figures'/'fig_thresholds.pdf')
+args=parser.parse_args()
+args.output.parent.mkdir(parents=True,exist_ok=True)
 plt.rcParams.update({'font.size': 8, 'font.family': 'serif', 'axes.linewidth': 0.6, 'lines.linewidth': 1.2, 'mathtext.fontset': 'cm'})
-A = json.load(open('../data/testA_m1.json')); B = json.load(open('../data/testB_poly_m2.json'))
+A = json.loads((ROOT/'data'/'testA_m1.json').read_text()); B = json.loads((ROOT/'data'/'testB_poly_m2.json').read_text())
 INK, BLUE, ORANGE, GRAY = '#111111', '#0072B2', '#D55E00', '#888888'
 fig, ax = plt.subplots(2, 2, figsize=(6.8, 5.0), sharex='col')
 def panel(a, rows, key, lam, title, cth, floor=None):
@@ -26,5 +33,5 @@ panel(ax[0, 1], B, 'D_micro', 0.035, r'(c) $m=2$: entropy $\mathrm{D}$, $\lambda
 panel(ax[1, 1], B, 'F_micro', 0.035, r'(d) $m=2$: defect $\mathrm{D}-\mathrm{B}$, $\lambda=0.035$   ($c_{\rm BKM}=4$)', 4.0, floor=3.0)
 for a in ax[1]: a.set_xlabel(r'horizon parameter $c$   ($\tau=c\,\log(1/\lambda)$)')
 ax[0, 0].legend(frameon=False, fontsize=7, loc='lower left')
-fig.tight_layout(); fig.savefig('../paper/fig_thresholds.pdf'); pass
+fig.tight_layout(); fig.savefig(args.output); plt.close(fig)
 print('ok')

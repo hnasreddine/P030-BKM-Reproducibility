@@ -35,6 +35,16 @@ exact/interval-arithmetic libraries. See `docs/PROOF_MAP.md`.
 - `docs/PROOF_MAP.md` — direct map from mathematical obligations to sources.
 - `SHA256SUMS.txt` and `RELEASE_MANIFEST.json` — file-level integrity inventory.
 
+## Current source tree and archive versions
+
+This branch is a **candidate for a future v1.0.2 research release**, not a
+published Zenodo record. The existing citable DOI `10.5281/zenodo.24457811`
+corresponds only to the immutable **v1.0.1** tag, not to these new
+figure/table regeneration fixes. Do not cite a v1.0.2 DOI until one exists.
+
+The four numerical tables and both figures now have a separate reproducibility
+check: see `REPRODUCIBILITY/FIGURES_TABLES_REPRODUCE.md`.
+
 ## Reproduction
 
 Test environment: Linux x86-64, Python 3.13, C++17 with libquadmath.

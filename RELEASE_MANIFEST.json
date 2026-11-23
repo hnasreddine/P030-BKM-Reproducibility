@@ -1,28 +1,28 @@
 {
   "name": "P030-BKM-Reproducibility",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "artifact_type": "public_scientific_software_data_and_numerical_certificates",
   "scope": "exactly orthogonal m=2, lambda=0.05, c=5, N=8500; separate historical SVD runs not certified by this enclosure",
   "files": [
     {
       "path": ".github/workflows/verify.yml",
-      "bytes": 1264,
-      "sha256": "8bacbe76fe67c57e1d50362fc74a454b1d6833c0bd54ffee4ffd29271557fd0e"
+      "bytes": 1768,
+      "sha256": "1c96ba455a58980ce7be1ac090413d3ad9d7c766c6792ca977149661d4957f82"
     },
     {
       "path": ".gitignore",
-      "bytes": 92,
-      "sha256": "af044d421f2eb37d3283827143cdfcb409173374b998d512b373fd66e2db03bc"
+      "bytes": 120,
+      "sha256": "c70e380a122172c036f33463bedc04c559f10c0467149b9f1abbd5f1df359166"
     },
     {
       "path": ".zenodo.json",
       "bytes": 926,
-      "sha256": "33e0190124a8f81bda2b4ab62061ea0dee85ee4e650238b864946321cb80bc7b"
+      "sha256": "4957589cac4dcda4ba3c78b08b74810087bac6583d50637d3827bbf32a5bd954"
     },
     {
       "path": "CITATION.cff",
       "bytes": 429,
-      "sha256": "981654fe5f3bde684bebd697e2d6d7e6d976039f8c923267c2ec9984c543a154"
+      "sha256": "7e1a6f1ae65b00e07e8df76d1c80ef2f91c615366104c21df7e76ae6fb75fbb3"
     },
     {
       "path": "DATA_LICENSE.md",
@@ -36,8 +36,13 @@
     },
     {
       "path": "README.md",
-      "bytes": 2569,
-      "sha256": "b4491501284869266da1cdf0db7e0d88e5f12134b857921ee7fb88ad64792226"
+      "bytes": 3047,
+      "sha256": "4274192185406e2c81030f4a1af1bdf600ba1bf1ec8a62593a37692b5029858f"
+    },
+    {
+      "path": "REPRODUCIBILITY/FIGURES_TABLES_REPRODUCE.md",
+      "bytes": 3832,
+      "sha256": "1e4a7420402085898699f004bd8ca534fac65a28c40a03de9334992ff464a7c6"
     },
     {
       "path": "REPRODUCIBILITY/README.md",
@@ -46,18 +51,18 @@
     },
     {
       "path": "REPRODUCIBILITY/code/make_figure_nonnormal.py",
-      "bytes": 2027,
-      "sha256": "8870aa4a8b3859fb126b33280bc08b960e0d06460a52bb1f3e1fc81b79d94445"
+      "bytes": 2320,
+      "sha256": "df07a7554252d2fef69f888f2f059deb08978d51f5eaadea82ab2d26c6e2de34"
     },
     {
       "path": "REPRODUCIBILITY/code/make_figures.py",
-      "bytes": 2550,
-      "sha256": "df1e4a4b6454145f547eda09d2933365088326df85f97301f3fadf3ede824c7e"
+      "bytes": 2849,
+      "sha256": "75b0b08d605c51fa9137a2b6234c78c8e6531172e38767c40c56985eddc31c2b"
     },
     {
       "path": "REPRODUCIBILITY/code/make_tables.py",
-      "bytes": 31934,
-      "sha256": "d214425bfdd5ff20264b543ab053ab29615c9959b1bc206d0089871ff6d8a05f"
+      "bytes": 7010,
+      "sha256": "c3fcd60976c9ce75a6fe1522c8ed677bdea1a038ebfae30e4c390a6a996d41d0"
     },
     {
       "path": "REPRODUCIBILITY/code/nonnormal.py",
@@ -560,6 +565,11 @@
       "sha256": "1030886f6cc3fab0cc36893492234dee946e3838a09a289ccd46dd6b9ebb7c53"
     },
     {
+      "path": "REPRODUCIBILITY/reference/published_table_rows.json",
+      "bytes": 1771,
+      "sha256": "bb0adb5f9d1ecc7a6b629881325be5b8d6d8ceecf1a586c790a6a021a2b4f6af"
+    },
+    {
       "path": "REPRODUCIBILITY/requirements.txt",
       "bytes": 48,
       "sha256": "835ca29884abe53c20ac3d8b78b42cc5d67a248bc3033195c48189cf1930b6e6"
@@ -590,6 +600,11 @@
       "sha256": "cdfe4d15aa953f2a4e14007a28bebff105885026c9e367b093c17ff0f5c76e46"
     },
     {
+      "path": "requirements-figures.txt",
+      "bytes": 46,
+      "sha256": "0a22cc8e597e2beb8ad4841cbe6f2545094895e6cdd2a3aead5a2b59effd6882"
+    },
+    {
       "path": "requirements-tested.txt",
       "bytes": 55,
       "sha256": "eb38f76d3b70ec8085d24e44ce316132b320a102b4e94e712b400ebb26d858d9"
@@ -600,9 +615,15 @@
       "sha256": "8b62764f1e707e535f19ae90038f626ea9aa3f3e035778cf2e02cf140ac84e4e"
     },
     {
+      "path": "tools/verify_paper_reproduction.py",
+      "bytes": 4628,
+      "sha256": "a6c4930b2771896c8ca71130770bca08e56bce5a2880157bcf887ddcbaaa63e8"
+    },
+    {
       "path": "tools/verify_release.py",
-      "bytes": 4478,
-      "sha256": "ce741a1994ee0184fcb10a311fecbf01bd5de8a6bf32bab28aecc0d8eb145879"
+      "bytes": 4733,
+      "sha256": "66d0f261248e7d6626e7718b77d16d70f15f1231a952bf24a959a99a4102b418"
     }
-  ]
+  ],
+  "public_status": "unreleased figure/table reproducibility patch candidate; v1.0.1 Zenodo archive unchanged"
 }

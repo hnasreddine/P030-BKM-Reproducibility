@@ -6,5 +6,5 @@ authors:
   - family-names: Nasreddine
     given-names: Hassan
     orcid: "https://orcid.org/0009-0001-0339-0978"
-version: "1.0.1"
+version: "1.0.2"
 repository-code: "https://github.com/hnasreddine/P030-BKM-Reproducibility"

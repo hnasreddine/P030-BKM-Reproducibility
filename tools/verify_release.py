@@ -22,6 +22,9 @@ required=['LICENSE','DATA_LICENSE.md','.zenodo.json','CITATION.cff','README.md',
  'REPRODUCIBILITY/exact_m2_certificate/certified_BKM_tight.py',
  'REPRODUCIBILITY/exact_m2_certificate/strict_dd_audit.cpp',
  'REPRODUCIBILITY/exact_m2_certificate/out_ideal_m2_lean.txt',
+ 'requirements-figures.txt','tools/verify_paper_reproduction.py',
+ 'REPRODUCIBILITY/FIGURES_TABLES_REPRODUCE.md',
+ 'REPRODUCIBILITY/reference/published_table_rows.json',
  'tools/reproduce_certified_point.sh']
 for rel in required:
  if not (R/rel).is_file():errors.append('missing: '+rel)
@@ -39,11 +42,12 @@ if manifest_path.is_file():
  ignored_dirs={'.git','.venv','__pycache__','.pytest_cache','.mypy_cache'}
  actual={p.relative_to(R).as_posix() for p in R.rglob('*')
         if p.is_file() and not (set(p.relative_to(R).parts) & ignored_dirs)
+        and not p.relative_to(R).as_posix().startswith('REPRODUCIBILITY/generated/')
         and p.suffix not in {'.pyc','.pyo'} and p.name not in {'.DS_Store'}}
  expected=set(listed)|{'RELEASE_MANIFEST.json','SHA256SUMS.txt'}
  for rel in sorted(actual-expected):errors.append('unmanifested: '+rel)
  for rel in sorted(expected-actual):errors.append('absent: '+rel)
- if m.get('version')!='1.0.1':errors.append('version mismatch')
+ if m.get('version')!='1.0.2':errors.append('version mismatch')
  sha_path=R/'SHA256SUMS.txt'
  if sha_path.is_file():
   lines=sha_path.read_text().splitlines()
@@ -71,7 +75,7 @@ for file in ['REPRODUCIBILITY/exact_m2_certificate/certified_BKM_tight.py',
    errors.append('omitted grid-printing contribution')
 try:
  meta=json.loads((R/'.zenodo.json').read_text())
- if meta.get('upload_type')!='software' or meta.get('version')!='1.0.1':errors.append('incorrect Zenodo metadata')
+ if meta.get('upload_type')!='software' or meta.get('version')!='1.0.2':errors.append('incorrect Zenodo metadata')
 except Exception as e:errors.append('unreadable Zenodo metadata: '+str(e))
 if errors:
  print('FAILED PUBLIC RELEASE CHECK:')
