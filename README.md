@@ -42,8 +42,8 @@ published Zenodo record. The existing citable DOI `10.5281/zenodo.24457811`
 corresponds only to the immutable **v1.0.1** tag, not to these new
 figure/table regeneration fixes. Do not cite a v1.0.2 DOI until one exists.
 
-The four numerical tables and both figures now have a separate reproducibility
-check: see `REPRODUCIBILITY/FIGURES_TABLES_REPRODUCE.md`.
+The four main numerical tables, twelve supplementary tables and both
+figures now have separate reproducibility checks: see `REPRODUCIBILITY/FIGURES_TABLES_REPRODUCE.md`.
 
 ## Reproduction
 

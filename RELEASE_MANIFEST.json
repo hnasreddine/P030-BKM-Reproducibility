@@ -36,13 +36,13 @@
     },
     {
       "path": "README.md",
-      "bytes": 3047,
-      "sha256": "4274192185406e2c81030f4a1af1bdf600ba1bf1ec8a62593a37692b5029858f"
+      "bytes": 3080,
+      "sha256": "02584f91dc905b6066618b569f9aefcaabb57cfda89200a66ad8cd2e9f8ad07b"
     },
     {
       "path": "REPRODUCIBILITY/FIGURES_TABLES_REPRODUCE.md",
-      "bytes": 3832,
-      "sha256": "1e4a7420402085898699f004bd8ca534fac65a28c40a03de9334992ff464a7c6"
+      "bytes": 4965,
+      "sha256": "b7ec138cac88d127e97bd9eb76d1248cf25dbc40587d78fdd4d7b7c10ad10917"
     },
     {
       "path": "REPRODUCIBILITY/README.md",
@@ -58,6 +58,11 @@
       "path": "REPRODUCIBILITY/code/make_figures.py",
       "bytes": 2849,
       "sha256": "75b0b08d605c51fa9137a2b6234c78c8e6531172e38767c40c56985eddc31c2b"
+    },
+    {
+      "path": "REPRODUCIBILITY/code/make_supplementary_tables.py",
+      "bytes": 36929,
+      "sha256": "d4b8aefe437c65cb6433ab4c13af30eb44764aaed9996d2521b706b68d811c8b"
     },
     {
       "path": "REPRODUCIBILITY/code/make_tables.py",
@@ -565,6 +570,11 @@
       "sha256": "1030886f6cc3fab0cc36893492234dee946e3838a09a289ccd46dd6b9ebb7c53"
     },
     {
+      "path": "REPRODUCIBILITY/reference/published_supplement_table_rows.json",
+      "bytes": 16265,
+      "sha256": "d34c44b6c7d7f45286bf3b7d0ff89efc358eb4ee63ceed2ed2262d3453d2832b"
+    },
+    {
       "path": "REPRODUCIBILITY/reference/published_table_rows.json",
       "bytes": 1771,
       "sha256": "bb0adb5f9d1ecc7a6b629881325be5b8d6d8ceecf1a586c790a6a021a2b4f6af"
@@ -616,13 +626,13 @@
     },
     {
       "path": "tools/verify_paper_reproduction.py",
-      "bytes": 4628,
-      "sha256": "a6c4930b2771896c8ca71130770bca08e56bce5a2880157bcf887ddcbaaa63e8"
+      "bytes": 4890,
+      "sha256": "0035285ae4236ff59a65df70ff7278bbf4a499ec8451ab7ad78d127206c2d071"
     },
     {
       "path": "tools/verify_release.py",
-      "bytes": 4733,
-      "sha256": "66d0f261248e7d6626e7718b77d16d70f15f1231a952bf24a959a99a4102b418"
+      "bytes": 4854,
+      "sha256": "84bd2f9a236b4137e2e97364e7155b1606b098dda35108867e54fb032b1fc257"
     }
   ],
   "public_status": "unreleased figure/table reproducibility patch candidate; v1.0.1 Zenodo archive unchanged"

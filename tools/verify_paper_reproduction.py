@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Clean-environment regression for the 4 published numerical tables and 2 figures.
+"""Clean-environment regression for 4 main + 12 supplementary tables and 2 figures.
 
 This test does not recertify the separate exact-m=2 continuum theorem. It
 reconstructs publication outputs from independently stored public datasets.
@@ -62,6 +62,9 @@ def main():
         temp=Path(tmp)
         output=temp/'newly-generated'
         print(run([sys.executable,str(CODE/'make_tables.py'),'--check','--output-dir',str(output/'tables')],cwd=temp).strip())
+        print(run([sys.executable,str(CODE/'make_supplementary_tables.py'),'--check',
+                   '--output-dir',str(output/'supplementary_tables')],cwd=temp).strip())
+        assert len(list((output/'supplementary_tables').glob('*.tex')))==12
         # Explicitly test the generated content against an adversarially corrupted
         # source copy. This ensures no formatting-only test can pass after data drift.
         work=temp/'mutation'
@@ -88,6 +91,6 @@ def main():
             assert content.startswith(b'%PDF') and len(content)>15000,(name,len(content))
             print('PASS:',name,'regenerated',len(content),'bytes from clean outside-repository cwd')
         assert len(list((output/'tables').glob('*.tex')))==4
-    print('PASS: complete four-table/two-figure reproduction regression')
+    print('PASS: complete 4 main-table / 12 supplement-table / 2 figure regression')
 
 if __name__=='__main__':main()

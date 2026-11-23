@@ -25,6 +25,8 @@ required=['LICENSE','DATA_LICENSE.md','.zenodo.json','CITATION.cff','README.md',
  'requirements-figures.txt','tools/verify_paper_reproduction.py',
  'REPRODUCIBILITY/FIGURES_TABLES_REPRODUCE.md',
  'REPRODUCIBILITY/reference/published_table_rows.json',
+ 'REPRODUCIBILITY/reference/published_supplement_table_rows.json',
+ 'REPRODUCIBILITY/code/make_supplementary_tables.py',
  'tools/reproduce_certified_point.sh']
 for rel in required:
  if not (R/rel).is_file():errors.append('missing: '+rel)
