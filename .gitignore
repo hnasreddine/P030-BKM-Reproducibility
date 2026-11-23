@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+*.o
+*.out
+*.exe
+strict_dd_audit
+cheb_dd
+.DS_Store
+.env
+.env.*
+.venv/

@@ -1,0 +1,41 @@
+name: P030 BKM scientific reproducibility
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  precomputed:
+    name: Integrity, analytic budget and BKM reproducer
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+          cache-dependency-path: requirements-tested.txt
+      - run: python -m pip install -r requirements-tested.txt
+      - run: python tools/verify_release.py
+      - run: bash RUN_PRECOMPUTED.sh
+      - run: python tools/verify_release.py
+  microscopic:
+    name: Microscopic C++ and continuum full replay
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+          cache-dependency-path: requirements-tested.txt
+      - run: sudo apt-get update && sudo apt-get install -y g++ libquadmath0
+      - run: python -m pip install -r requirements-tested.txt
+      - run: bash RUN_EXACT.sh
+      - run: python tools/verify_release.py

@@ -1,0 +1,22 @@
+{
+  "title": "P030: Memory-Induced Entropic Crossovers in Nonnormal Quantum Decay — Reproducibility Code and Numerical Certificates",
+  "upload_type": "software",
+  "description": "Self-contained C++/Python software, canonical 8500-mode input data, numerical tables and computer-assisted verification for an exactly orthogonal m=2 BKM continuum enclosure at one specified parameter point (subject to H1–H5); also includes separately labelled historical numerical experiments. Does not include the unpublished manuscript. Original code and author-owned data BSD-3-Clause.",
+  "creators": [
+    {
+      "name": "Nasreddine, Hassan",
+      "orcid": "0009-0001-0339-0978"
+    }
+  ],
+  "keywords": [
+    "quantum information",
+    "BKM entropy defect",
+    "non-normal quantum dynamics",
+    "Friedrichs model",
+    "reproducible numerical verification",
+    "certified computation"
+  ],
+  "version": "1.0.0",
+  "access_right": "open",
+  "license": "BSD-3-Clause"
+}

@@ -1,0 +1,1 @@
+Best rigorous analytic continuum error bound: E <= 6.93350120184985239637664566427e-15 using r=23

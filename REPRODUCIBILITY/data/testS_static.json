@@ -1,0 +1,28 @@
+{
+ "random_tests": {
+  "det_id": 1.9195686747208022e-19,
+  "def_id": 3.6772201729940105e-27,
+  "dplus_id": 7.808465018369022e-31,
+  "viol": 0,
+  "scal": 0.9999946941541292,
+  "inv": 8.574741595735382e-25,
+  "ntests": 60
+ },
+ "abs_vs_rel_counterexample": [
+  {
+   "abs_diff": 1e-06,
+   "D_ratio": 3.8105241919262416,
+   "defect_ratio": 3.9999999998825286
+  },
+  {
+   "abs_diff": 1e-09,
+   "D_ratio": 3.8712860339588757,
+   "defect_ratio": 4.0
+  },
+  {
+   "abs_diff": 1e-12,
+   "D_ratio": 3.9025399146956454,
+   "defect_ratio": 4.0
+  }
+ ]
+}
