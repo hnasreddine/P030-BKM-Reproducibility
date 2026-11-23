@@ -6,8 +6,8 @@
   "files": [
     {
       "path": ".github/workflows/verify.yml",
-      "bytes": 1768,
-      "sha256": "1c96ba455a58980ce7be1ac090413d3ad9d7c766c6792ca977149661d4957f82"
+      "bytes": 1818,
+      "sha256": "321a0321105b589fa69a415d456774e4b6014da2b10119ddc8d2f033301a8c93"
     },
     {
       "path": ".gitignore",
@@ -301,8 +301,8 @@
     },
     {
       "path": "REPRODUCIBILITY/exact_m2_certificate/continuum_proof/CONTINUUM_BOUND_AND_TRANSFER.md",
-      "bytes": 8460,
-      "sha256": "98db96071d976d905f2c5b7098ea9c5dc050c15378b8711328e0c48a679c69ba"
+      "bytes": 8695,
+      "sha256": "752db2a8c26e8a0e23dd063a6d3c613d35c36e195c6fffec0356ccabe6df7c9a"
     },
     {
       "path": "REPRODUCIBILITY/exact_m2_certificate/continuum_proof/README.md",
@@ -623,6 +623,11 @@
       "path": "tools/reproduce_certified_point.sh",
       "bytes": 947,
       "sha256": "8b62764f1e707e535f19ae90038f626ea9aa3f3e035778cf2e02cf140ac84e4e"
+    },
+    {
+      "path": "tools/test_shifted_poisson.py",
+      "bytes": 1418,
+      "sha256": "22d667b09b884fe0f914397065d456efca5e1dd9a716a706fab2207606a5e2d9"
     },
     {
       "path": "tools/verify_paper_reproduction.py",

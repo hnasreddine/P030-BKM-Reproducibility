@@ -35,7 +35,7 @@ Both \(V\) and \(V_N\) are compressions of unitary one-excitation Hamiltonian gr
 
 ### 2. Poisson aliasing and derivatives
 
-The bump density and all its derivatives vanish at the endpoints \([-1,1]\), so trapezoidal sampling with spacing \(h=2/(N-1)\) is a full lattice sum with zero exterior terms. Poisson summation gives \(F_N(s)=\sum_{k\in\mathbb Z}F(s+kP)\), \(P=2\pi/h\), with the Fourier convention above. Repeated integration by parts yields
+The bump density and all its derivatives vanish at the endpoints \([-1,1]\), so trapezoidal sampling with spacing \(h=2/(N-1)\) is a full lattice sum with zero exterior terms. Poisson summation on the shifted grid gives \(F_N(s)=\sum_{k\in\mathbb Z}(-1)^kF(s+kP)\), \(P=2\pi/h=\pi(N-1)\), because \(e^{2\pi i k(-1)/h}=(-1)^{k(N-1)}=(-1)^k\) for even \(N=8500\), with the Fourier convention above. The phase does not affect the subsequent norm estimate: \(|(-1)^k|=1\), so the aliases are bounded by the triangle inequality. Repeated integration by parts yields
 
 \[
  \|F(t)\|\le C_r/|t|^r,\quad C_r=\int_{-1}^1\|J^{(r)}(x)\|_2dx.
