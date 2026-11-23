@@ -22,11 +22,11 @@ The next weighted moment is strictly positive. Indeed, with `dmu=theta(x)x^{-2}d
 
 `integral theta p_2(x)/x^3 dx = (1/p_2(0)) integral theta p_2(x)^2 / x^3 dx > 0`, since `p_2(0)>0`.
 
-Thus the **ideal positive bath genuinely has transfer order exactly m=2** (the history's SVD-rounded bath does not enforce exact zero moments).
+Thus the **ideal positive bath genuinely has transfer order exactly m=2** (the rounded-SVD bath does not enforce exact zero moments).
 
 ### Validated coefficient intervals
 
-`certify_polynomial_moments.py` encloses the four integrals with `mpmath.iv` and **150,000** uniformly spaced panels. The analytic Poisson/trapezoid remainder uses `r=14`, the previously isolated Sturm bounds `B12<4.378e21`, `B13<2.412e24`, `B14<1.566e27`, and the elementary inequality `B_l<=2^(12-l) B12` for `l<=12`. For each integrand `theta(x) x^j`, the 14th derivative L1 norm is bounded by the product rule and elementary bounds on derivatives of x^j for x>=.1. The remaining quadrature error is bounded by `2*zeta(14)*C14*(h/(2*pi))^14`; rational conservative replacements `2*zeta(14)<2.002` and `2*pi>6.28` are used. All quadrature sums and coefficient algebra are interval-enclosed.
+`certify_polynomial_moments.py` encloses the four integrals with `mpmath.iv` and **150,000** uniformly spaced panels. The analytic Poisson/trapezoid remainder uses `r=14`, the established Sturm bounds `B12<4.378e21`, `B13<2.412e24`, `B14<1.566e27`, and the elementary inequality `B_l<=2^(12-l) B12` for `l<=12`. For each integrand `theta(x) x^j`, the 14th derivative L1 norm is bounded by the product rule and elementary bounds on derivatives of x^j for x>=.1. The remaining quadrature error is bounded by `2*zeta(14)*C14*(h/(2*pi))^14`; rational conservative replacements `2*zeta(14)<2.002` and `2*pi>6.28` are used. All quadrature sums and coefficient algebra are interval-enclosed.
 
 This proves that the sum of absolute coefficient differences between the exactly orthogonal polynomial and the recorded high-precision decimal polynomial is **less than 4.703e-30**, and in particular **less than 5e-30**, uniformly implying `sup_{x in [-1,1]} |p_exact(x)-p_decimal(x)|<5e-30`.
 
@@ -58,13 +58,13 @@ The Hermitian arrowhead Hamiltonian satisfies `||H_p-H_q||_2 <= lambda ||G_p-G_q
 
 **`||V_{N,p}(T)-V_{N,q}(T)||_2 < 4e-27`.**
 
-This closes the former *ideal orthogonal polynomial versus rounded numerical bath* gap at the specified lambda, c and N, without assuming a tiny BKM difference merely from close coefficients. See `sensitivity_to_exact_polynomial.py`.
+This closes the *exact-moment polynomial versus rounded numerical representation* error at the specified lambda, c and N, without assuming a tiny BKM difference merely from close coefficients. See `sensitivity_to_exact_polynomial.py`.
 
-## C. New complete direct Hamiltonian run and interval BKM integral
+## C. Direct Hamiltonian propagation and interval BKM integral
 
-`prepare_exact_bath.py` generated all 8500 high-precision grid nodes and 2x2 matrix-square-root coupling blocks using the certified-near-exact polynomial, keeping the already verified Bessel coefficients and the same lambda/T. The corrected full-Hamiltonian C++ Chebyshev propagation was run with `-O3 -std=c++17 -fno-fast-math -ffp-contract=off`.
+`prepare_exact_bath.py` generated all 8500 high-precision grid nodes and 2x2 matrix-square-root coupling blocks using the coefficient interval specified in Section A and the Bessel coefficients and the same lambda/T. The corrected full-Hamiltonian C++ Chebyshev propagation was run with `-O3 -std=c++17 -fno-fast-math -ffp-contract=off`.
 
-A separately instrumented strict double-double run reached K=12865 on both columns and reproduced the non-instrumented output **byte-for-byte**. The DD input-parser audit tested all 46,867 tokens against exact rationals: zero violations of the specified parser budget. No disallowed DD nonoverlap was detected. The instrument reports:
+A separately instrumented strict double-double run reached K=12865 on both columns and reproduced the non-instrumented output **byte-for-byte**. The DD input-parser verification tested all 46,867 tokens against exact rationals: zero violations of the specified parser budget. No disallowed DD nonoverlap was detected. The instrument reports:
 
 - `GLOBAL_SUMRES 7.8585094074430482021e-26`
 - `INITRES 3.0299503750250085138e-31`
@@ -89,9 +89,9 @@ As an independent **numerical diagnostic**, 160-digit eigenvalue evaluation of t
 
 ## D. Full operator error budget and continuum transfer
 
-The continuum-to-exact-discrete bound applies to the exact polynomial as well as the rounded historical polynomial. We freshly reran `full_certified_operator_bound.py` and obtained `9.355083991611e-23` (the Poisson alias identity for the shifted grid includes `(-1)^k`; its absolute-value bound is unchanged).
+The continuum-to-exact-discrete bound applies to the exact polynomial as well as the rounded-SVD polynomial. The program `full_certified_operator_bound.py` gives `9.355083991611e-23` (the Poisson alias identity for the shifted grid includes `(-1)^k`; its absolute-value bound is unchanged).
 
-The previously derived local double-double arithmetic lemma is used **under** the actual IEEE 754 binary64 nearest-rounding mode, normalized operands, correct FMA and no reassociation. The strict C++ execution recorded normalized double-double values and identical outputs. Conservative accounting of all components gives:
+The double-double arithmetic lemma proved in the accompanying note is used **under** the actual IEEE 754 binary64 nearest-rounding mode, normalized operands, correct FMA and no reassociation. The strict C++ execution recorded normalized double-double values and identical outputs. Conservative accounting of all components gives:
 
 | Error source | Strict upper budget |
 |---|---:|
@@ -121,7 +121,7 @@ No small-defect subtraction was used. The transfer employs positivity of the Sch
 
 This enclosure is restricted to the exactly orthogonal order-two bath at the stated
 parameter point, the stated initial state, the specified discretization and the
-IEEE 754 non-contracted binary64 execution. The historical rounded-SVD polynomial
+IEEE 754 non-contracted binary64 execution. The rounded-SVD polynomial
 and its other numerical table entries are distinct experiments. The analytic
 proofs and programs in this archive give the mathematical assumptions and
 individually checkable bounds; they do not constitute proof-assistant verification

@@ -1,8 +1,8 @@
-"""Reproduce the ten original supplementary tables from recorded data.
+"""Render ten supplementary tables from recorded simulation results.
 
 Includes two separately derived order-two tables published later. All twelve
 tables are compared to the final JMP supplementary LaTeX numerical entries.
-No prose or historical narrative output is distributed by this generator.
+The generator produces numerical table entries without rewriting the surrounding manuscript prose.
 """
 import json, math
 from pathlib import Path
@@ -245,7 +245,7 @@ For Example~\ref{ex:m1} at $\tau=2.2\log(1/\lambda)$, $\lambda=0.1$ and $0.07$ (
 ''' % tuple([sci(e1['bath_discretization'][i]['diff_vs_ref']) for i in (1, 2, 3, 4, 5)] + [sci(e1['precision_direct']['double_vs_longdouble']), sci(e7['precision_direct']['double_vs_longdouble']), sci(e1['long_time_propagation'][3]['diff'])] + [sci(fd(e1['contour_quadrature'], 'n', n, 'diff_vs_n320')) for n in (16, 24, 32, 48)] + [sci(fd(e7['memory_cutoff'], 'L', Lc, 'err_vs_direct')) for Lc in (25, 50, 100, 150, 200, 300)]))
 w(r'''The static statements of Sec.~\ref{sec:static} were tested on $%d$ random states with $d\le4$ and excited blocks with eigenvalues down to $10^{-30}$: the identities \eqref{eq:Dkernel}, \eqref{eq:defectkernel}, \eqref{eq:DplusIntegral} hold to at least $15$ digits, and no violation of \eqref{eq:schurbound}--\eqref{eq:mainuniform} was found.
 ''' % S['random_tests']['ntests'])
-# The original data-generation expressions above render ten tables. Retain
+# The data-generation expressions above render ten tables. Retain
 # their numeric provenance but distribute only the actual supplementary rows.
 rendered='\n'.join(out)
 labels=['recon','ep','clusters','fixedcontour','m1','v03','m2','H','nonnormal','generic']
@@ -260,6 +260,7 @@ def find_rows(tex,label):
 all_rows={label:find_rows(rendered,label) for label in labels}
 # The high-precision microscopic bath is a separate, later published dataset.
 hp=json.loads((Path(__file__).resolve().parent.parent/'order2_high_precision'/'direct_m2_results.json').read_text(),parse_float=Decimal)
+ren_hp=json.loads((Path(__file__).resolve().parent.parent/'order2_high_precision'/'testB_poly_m2.json').read_text(),parse_float=Decimal)
 def select_hp(lam,c,N):
     matches=[r for r in hp if Decimal(str(r['lam']))==Decimal(str(lam)) and Decimal(str(r['c']))==Decimal(str(c)) and r['N']==N]
     if len(matches)!=1:raise ValueError((lam,c,N,len(matches)))
@@ -273,7 +274,10 @@ def scientific(x,places):
 rows=[]
 for lam,c,N in [('0.050','4.5',8500),('0.050','5.0',8500),('0.050','5.0',10500),('0.050','5.5',8500),('0.035','5.0',17000)]:
     p=select_hp(lam,c,N)
-    rows.append(' & '.join([f'${lam}$',f'${c}$',f'${N}$',f'${scientific(p["F_micro"],9)}$',f'${scientific(p["F_pole"],9)}$',f'${scientific(p["relative_discrepancy"],2)}$'])+' \\\\')
+    matches=[r for r in ren_hp if Decimal(str(r['lam']))==Decimal(lam) and Decimal(str(r['c']))==Decimal(c)]
+    assert len(matches)==1,(lam,c,len(matches))
+    ren=matches[0]
+    rows.append(' & '.join([f'${lam}$',f'${c}$',f'${N}$',f'${scientific(p["F_micro"],9)}$',f'${scientific(p["F_pole"],9)}$',f'${scientific(p["relative_discrepancy"],2)}$',f'${Decimal(str(p["F_micro"]))/Decimal(str(ren["F_ren"])):.4f}$',f'${Decimal(str(p["F_micro"]))/Decimal(str(p["F_leading"])):.3f}$'])+' \\\\')
 all_rows['m2directhp']=rows
 
 # The last table comes from the actual certified error-budget source code.

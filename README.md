@@ -35,15 +35,15 @@ exact/interval-arithmetic libraries. See `docs/PROOF_MAP.md`.
 - `docs/PROOF_MAP.md` — direct map from mathematical obligations to sources.
 - `SHA256SUMS.txt` and `RELEASE_MANIFEST.json` — file-level integrity inventory.
 
-## Current source tree and archive versions
+## Release and citation
 
-This branch is a **candidate for a future v1.0.2 research release**, not a
-published Zenodo record. The existing citable DOI `10.5281/zenodo.24457811`
-corresponds only to the immutable **v1.0.1** tag, not to these new
-figure/table regeneration fixes. Do not cite a v1.0.2 DOI until one exists.
+This archive contains the complete research software and numerical data for
+version **1.0.2**. For a bibliographic citation, use the DOI assigned to this
+version by Zenodo once its record has been published. The metadata in
+`CITATION.cff` identify the software and author independently of a DOI.
 
 The four main numerical tables, twelve supplementary tables and both
-figures now have separate reproducibility checks: see `REPRODUCIBILITY/FIGURES_TABLES_REPRODUCE.md`.
+figures have reproducibility checks: see `REPRODUCIBILITY/FIGURES_TABLES_REPRODUCE.md`.
 
 ## Reproduction
 

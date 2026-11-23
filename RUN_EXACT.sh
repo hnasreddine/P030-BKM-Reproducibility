@@ -9,7 +9,7 @@ CERT="$ROOT/REPRODUCIBILITY/exact_m2_certificate"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 cd "$CERT"
-"${CXX:-g++}" -O3 -std=c++17 -fno-fast-math -ffp-contract=off strict_dd_audit.cpp -o "$TMP/strict_dd" -lquadmath
+"${CXX:-g++}" -O3 -std=c++17 -fno-fast-math -ffp-contract=off strict_dd_verification.cpp -o "$TMP/strict_dd" -lquadmath
 "$TMP/strict_dd" input_005_5_8500_ideal_m2.txt "$TMP/strict_out.txt" 2> "$TMP/strict.log"
 cmp "$TMP/strict_out.txt" out_ideal_m2_strict.txt
 grep -q 'BAD_NONOVERLAP 0' "$TMP/strict.log"

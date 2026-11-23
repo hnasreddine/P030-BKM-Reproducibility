@@ -17,7 +17,7 @@ we establish
  \boxed{\|V(T)-V_{8500}(T)\|_2<9.356\times10^{-23}<10^{-22}.}
 \]
 
-This is a **continuum-discretization theorem**; the finite-precision propagation is bounded separately by the accompanying numerical certificate. The proof is independent of any spectral gap, singular-value separation, or two-pole approximation. It applies both to the mathematically exact normalized \(m=2\) orthogonal polynomial and to the original **rounded** degree-two polynomial in P030 V0.8, regarded as a precisely defined real polynomial. The exact order-two moment conditions hold only for the first, not automatically for the historical rounded polynomial.
+This is a **continuum-discretization theorem**; the finite-precision propagation is bounded separately by the accompanying numerical certificate. The proof is independent of any spectral gap, singular-value separation, or two-pole approximation. It applies both to the mathematically exact normalized \(m=2\) orthogonal polynomial and to the **rounded-SVD** degree-two polynomial used for the separate numerical comparisons, regarded as a precisely defined real polynomial. The exact order-two moment conditions hold only for the first, not automatically for the rounded-SVD polynomial.
 
 ### 1. Matrix Volterra perturbation
 
@@ -68,13 +68,13 @@ Reproduce with `full_certified_operator_bound.py`; it calculates the interval en
 
 ### 4. Rigorous polynomial bounds without depending on the SVD's coefficients
 
-The original `poly_jet` normalizes its degree-two polynomial to maximum absolute value 1 over 20,001 equally spaced points of \([0.1,0.9]\). Markov's inequality on an interval of length 0.8 implies that its true supremum differs from the sampled supremum by at most a factor \((1-10\times0.00002)^{-1}<1.001\). Therefore, conservatively,
+The `poly_jet` normalizes its degree-two polynomial to maximum absolute value 1 over 20,001 equally spaced points of \([0.1,0.9]\). Markov's inequality on an interval of length 0.8 implies that its true supremum differs from the sampled supremum by at most a factor \((1-10\times0.00002)^{-1}<1.001\). Therefore, conservatively,
 
 \[
  \|p\|_\infty\le1.001,\quad\|p'\|_\infty\le10.01,\quad\|p''\|_\infty\le25.025.
 \]
 
-These bounds hold regardless of the rounding in the three SVD coefficients; even the original rounded density is positive semidefinite because its off-diagonal term obeys \(|1.8\,\vartheta p|<2\vartheta\), while each diagonal spectral density contains at least \(2\vartheta\) on the positive bump.
+These bounds hold regardless of the rounding in the three SVD coefficients; even the rounded density is positive semidefinite because its off-diagonal term obeys \(|1.8\,\vartheta p|<2\vartheta\), while each diagonal spectral density contains at least \(2\vartheta\) on the positive bump.
 
 Writing \(w=0.4\), \(\eta=1.8\), \(r=14\), the density entries obey
 
@@ -121,7 +121,7 @@ The last identity uses orthogonality to the linear polynomial \((p_2(x)-p_2(0))/
  +0.16164064224041778253637867509165.
 \]
 
-This corrects the historical `poly_jet` implementation's two residual lower moments (~\(10^{-15}\)). It does not retroactively transform the old N-mode simulations into results for the exactly orthogonal polynomial; rerunning them with the exact coefficients would be needed to make that identification.
+The exact-moment polynomial eliminates the two residual lower moments of the SVD polynomial (~\(10^{-15}\)). The finite-mode simulations using rounded-SVD coefficients and the exact-moment calculation are distinct; the continuum enclosure applies only to the exact-moment calculation.
 
 ## Result 3 — a state-adaptive multiplicative BKM transfer theorem
 
@@ -154,4 +154,4 @@ lower bound of the displayed matrix, the transfer theorem above gives
 This conclusion concerns precisely m=2, lambda=0.05, c=5, N=8500,
 (gamma_s,gamma_f)=(1,3), the initial state described in the exact-bath
 certificate and the documented IEEE 754 / interval-arithmetic assumptions.
-The historical SVD-rounded simulations do not inherit this interval.
+The SVD-rounded simulations do not inherit this interval.

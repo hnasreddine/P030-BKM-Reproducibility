@@ -1,6 +1,6 @@
 from pathlib import Path
 """Validate decimal input tokens against analytic bath samples using mpmath.iv.
-A separate DD parse error budget is required. For historical fixed SVD pcoef:
+A separate DD parse error budget is required. For the fixed rounded-SVD polynomial coefficients:
  p(x)=0.8406338664123079-4.503497377672212 x+5.200634288262571 x².
 """
 import mpmath as mp, pathlib, time

@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Reconstruct the four numerical tables printed in the P030 JMP manuscript.
+"""Reconstruct four independent numerical table datasets printed in the P030 JMP manuscript.
 
 All table entries come from the recorded simulation datasets, not a copy of
-pre-existing LaTeX rows. The historical rounded-SVD m=2 runs are kept separate
+pre-existing LaTeX rows. The rounded-SVD m=2 runs are kept separate
 from the exactly orthogonal single-point continuum certificate.
+
+Inputs are archived simulation results, not new microscopic propagation.
 
 Use:
  python REPRODUCIBILITY/code/make_tables.py --check
@@ -44,6 +46,7 @@ def latex_rows():
     A=load('testA_m1.json');B=load('testB_poly_m2.json')
     C=load('testC_EP.json');N2=load('testN2_micro.json')['rows']
     HP=json.loads((ROOT/'order2_high_precision'/'direct_m2_results.json').read_text(),parse_float=Decimal)
+    REN=json.loads((ROOT/'order2_high_precision'/'testB_poly_m2.json').read_text(),parse_float=Decimal)
     result={}
     ep=[]
     for lam in ('0.2','0.14','0.1','0.07','0.05'):
@@ -65,7 +68,10 @@ def latex_rows():
     hp=[]
     for lam,c,n in [('0.050','4.5',8500),('0.050','5.0',8500),('0.050','5.5',8500),('0.035','5.0',17000)]:
         z=match(HP,lam=lam,c=c,N=n)
-        hp.append(' & '.join((f'${lam}$',f'${c}$',math_sci(z['F_micro'],8),math_sci(z['F_pole'],8),math_sci(z['relative_discrepancy'],2)))+' '+TAB_END)
+        ren=match(REN,lam=lam,c=c)
+        # F_ren: two-term threshold formula with fitted resonances (VI.14).
+        # F_leading: the bare-rate asymptotic specialization (VI.16).
+        hp.append(' & '.join((f'${lam}$',f'${c}$',math_sci(z['F_micro'],8),math_sci(z['F_pole'],8),math_sci(z['relative_discrepancy'],2),f'${Decimal(str(z["F_micro"]))/Decimal(str(ren["F_ren"])):.4f}$',f'${Decimal(str(z["F_micro"]))/Decimal(str(z["F_leading"])):.3f}$'))+' '+TAB_END)
     result['m2hp']=hp
     non=[]
     for c in ('1','3','5'):

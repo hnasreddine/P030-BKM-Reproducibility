@@ -2,8 +2,8 @@
 
 This mathematical note records the double-double operations, their error
 estimates and the positive-kernel multiplicative transfer argument. Some
-illustrative numerical values below concern the **historical rounded-polynomial
-bath**, not the final exactly orthogonal m=2 experiment. The exact-bath proof,
+illustrative numerical values below concern the **rounded-SVD-polynomial
+bath**, not the separate exactly orthogonal m=2 model. The exact-bath proof,
 conservative total budget and final interval are in
 `CERTIFICATE_IDEAL_ORDER2_2026-11-22.md`.
 
@@ -11,7 +11,7 @@ conservative total budget and final interval are in
 
 Let u=2^-53 be the IEEE 754 binary64 unit roundoff, ν=2^-1074 the minimum positive subnormal, and write each double-double number as X=xh+xl with |xl|≤u|xh|. All operations below are performed round-to-nearest, ties-to-even; explicit `std::fma` is correctly rounded and the C++ compiler must not apply reassociation or fast-math. No overflow or invalid nonfinite arithmetic is permitted. As usual, for a finite basic arithmetic operation, a conservative rounding model is `|fl(t)-t|≤u|t|+ν`, with the ν term covering underflow.
 
-The actual source routines in `cheb_dd_lambda_corrected.cpp` and `interval_dd_audit_normcheck.cpp` implement:
+The actual source routines in `cheb_dd_lambda_corrected.cpp` and `strict_dd_verification.cpp` implement:
 
 **Add:** `s=fl(ah+bh); v=fl(s-ah); t0=fl(fl(bh-v)+fl(ah-fl(s-v))); t=fl(fl(t0+al)+bl); z=fl(s+t); l=fl(t-fl(z-s))`. **Sub** is the same, with b negated. This is an exact `TwoSum` for the high components followed by two rounded corrections and a `FastTwoSum`-style output.
 
@@ -37,12 +37,12 @@ The lemma follows from the standard TwoSum/FastTwoSum identities and FMA error-f
 
 ## 2. Arithmetic preconditions and recorded residuals
 
-- The new executable `strict_dd_audit.cpp` was compiled with `g++ -O3 -std=c++17 -fno-fast-math -ffp-contract=off` and checked `std::numeric_limits<double>::is_iec559` and `fegetround()==FE_TONEAREST` before execution: **PASS**.
-- It processed both columns with the recorded 8500 modes and K=12865. Exactly the historical corrected output was reproduced (`cmp` exit status 0).
-- The strict checker recorded `BAD_NONOVERLAP 0`, `MAX_OVERLAP 1.1102056881859389490e-16 < u=1.1102230246251565e-16`. The check is on the actual intermediate DD results in the propagation, not a claim about every possible input to the program.
+- The verification executable `strict_dd_verification.cpp` was compiled with `g++ -O3 -std=c++17 -fno-fast-math -ffp-contract=off` and checked `std::numeric_limits<double>::is_iec559` and `fegetround()==FE_TONEAREST` before execution: **PASS**.
+- It processed both columns with the recorded 8500 modes and K=12865. The recorded output was reproduced (`cmp` exit status 0).
+- The strict verifier recorded `BAD_NONOVERLAP 0`, `MAX_OVERLAP 1.1102056881859389490e-16 < u=1.1102230246251565e-16`. The check is on the actual intermediate DD results in the propagation, not a claim about every possible input to the program.
 - An additional exact-rational comparison of all 46,867 parsed decimal tokens against binary64 `high+low` found zero violations of `|DD(decimal)-decimal| ≤ 2^-100 |decimal| + 1e-300`. The maximal observed overlap among nonzero parsed DD inputs was 0.997592u. Three extremely tiny input tokens were below 1e-300 and were represented as exact binary zero, which is permitted by the absolute term.
 - An independent, deterministic stress script checked 25,000 each of +, − and × against **exact rational** results, with error ratios to u² scale below 1.83, 1.87 and 2.96 respectively. This is a counterexample search, not the proof.
-- Earlier instrument reports `GLOBAL_SUMRES 7.8585094074430482021e-26`, `INITRES 3.0299503750250085138e-31`, `OUTSUM 2.2659878295377634434e-29`. The strict replay reproduces these values.
+- The instrument reports `GLOBAL_SUMRES 7.8585094074430482021e-26`, `INITRES 3.0299503750250085138e-31`, `OUTSUM 2.2659878295377634434e-29`. The strict replay reproduces these values.
 
 Caveat: the numerical overlap maxima use normal binary64 comparisons; the gap below u is much larger than a rounding ulp, so this check is decisive for the actual run, but independent formal compiler/runtime verification remains a separate level of assurance.
 
@@ -56,7 +56,7 @@ Thus the recurrence errors in the two-column instrument are propagated without a
 
 `E_DD < 1.324e-23`.
 
-The exact-rational parser audit justifies the missing term `E_Bessel_parse ≤ 134.051 × 2^-100 + (2K+1)×1e-300 < 1.058e-28` from converting the recorded decimal Bessel coefficients to DD, separately from the already validated ODE residual coefficient error <1.717e-32. The conversion of source decimal grid/coupling tokens into DD and the resulting Hamiltonian perturbation has budget <1.236e-24 (from the existing source bound). Conversion of the binary64 DD output to the printed decimal representation is <1.243e-24, checked against exact fractions. The series truncation estimate is <3e-97. The recorded time token is within 4.605e-49 of 2000 log(20), so a generous contribution of 1e-47 is harmless.
+The exact-rational parser verification justifies the missing term `E_Bessel_parse ≤ 134.051 × 2^-100 + (2K+1)×1e-300 < 1.058e-28` from converting the recorded decimal Bessel coefficients to DD, separately from the already validated ODE residual coefficient error <1.717e-32. The conversion of source decimal grid/coupling tokens into DD and the resulting Hamiltonian perturbation has budget <1.236e-24 (from the existing source bound). Conversion of the binary64 DD output to the printed decimal representation is <1.243e-24, checked against exact fractions. The series truncation estimate is <3e-97. The recorded time token is within 4.605e-49 of 2000 log(20), so a generous contribution of 1e-47 is harmless.
 
 The continuum aliasing certificate (with the corrected Poisson shift phase (-1)^k) gives `<9.356e-23` between the continuous Hamiltonian and **exact** N-mode propagation. Summing the conservative budgets:
 
@@ -70,7 +70,7 @@ The continuum aliasing certificate (with the corrected Poisson shift phase (-1)^
 | Bessel residual/ODE, Chebyshev tail, time | <2e-32 (plus negligible 1e-47) |
 | **Total, with conservative round-ups** | **<1.093e-22** |
 
-Thus the previously used `E=1.2e-22` has margin around 1.07e-23 in this controlled numerical environment. ***The historical code is not arbitrary-platform portable without these IEEE/compiler constraints.***
+The conservative bound `E=1.2e-22` has a margin of approximately 1.07e-23 in this numerical environment. These arithmetic estimates require the stated IEEE/compiler environment; arbitrary-platform portability is not asserted.
 
 ## 4. Positive BKM integral and transfer
 
@@ -109,7 +109,7 @@ where `Phi(c,kappa)=c²(1-kappa)/(1-c*kappa)`. Changing variables `t=a_minus v` 
 
 This proves the multiplicative transfer step directly, provided `C0>0`, W invertible, δ<1, `1-a_plus*s>0`, and `c_plus*kappa<1`, all of which are satisfied for the recorded parameter intervals. It does **not** depend on an empirical observation that the relative BKM error is small.
 
-The original 122,099-bin Darboux evaluation gives
+The 122,099-bin Darboux evaluation gives
 
 `3.9670526733148689e-41 < Delta(W_hat) < 3.9710197759486385e-41`.
 
@@ -117,7 +117,7 @@ The interval singular-value bound `sigma_min(W_hat)>6.7652934423519234e-20`, tog
 
 **`3.9529919639270994e-41 < Delta_BKM,continuum < 3.985119533633871e-41`.**
 
-The rounding-operation and BKM-transfer arguments apply under the stated numerical assumptions. For the exactly orthogonal bath and the full continuum budget, use `CERTIFICATE_IDEAL_ORDER2_2026-11-22.md` and the executable `final_error_budget.py`, rather than the historical rounded-polynomial values in this auxiliary note.
+The rounding-operation and BKM-transfer arguments apply under the stated numerical assumptions. For the exactly orthogonal bath and the full continuum budget, use `CERTIFICATE_IDEAL_ORDER2_2026-11-22.md` and the executable `final_error_budget.py`, rather than the rounded-SVD-polynomial values in this auxiliary note.
 
 
 ## References for floating-point arithmetic identities

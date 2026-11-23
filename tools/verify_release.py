@@ -20,7 +20,7 @@ required=['LICENSE','DATA_LICENSE.md','.zenodo.json','CITATION.cff','README.md',
  'REPRODUCIBILITY/exact_m2_certificate/continuum_proof/CONTINUUM_BOUND_AND_TRANSFER.md',
  'REPRODUCIBILITY/exact_m2_certificate/final_error_budget.py',
  'REPRODUCIBILITY/exact_m2_certificate/certified_BKM_tight.py',
- 'REPRODUCIBILITY/exact_m2_certificate/strict_dd_audit.cpp',
+ 'REPRODUCIBILITY/exact_m2_certificate/strict_dd_verification.cpp',
  'REPRODUCIBILITY/exact_m2_certificate/out_ideal_m2_lean.txt',
  'requirements-figures.txt','tools/verify_paper_reproduction.py',
  'REPRODUCIBILITY/FIGURES_TABLES_REPRODUCE.md',
@@ -59,13 +59,7 @@ if manifest_path.is_file():
    for rel,digest in pairs.items():
     if digest!=listed[rel]['sha256']:errors.append('SHA256SUMS hash mismatch: '+rel)
 # Exclude unrelated working materials from the scientific archive.
-banned={'AUDIT','history','P030_final_audit'}
-for path in R.rglob('*'):
- if not path.is_file():continue
- if set(path.relative_to(R).parts)&banned:errors.append('internal file in public package: '+str(path.relative_to(R)))
- if path.name in ('AUDIT_FINAL.md','README_PUBLISH_FR.md',
-                  'DATA_AVAILABILITY_FOR_MANUSCRIPT.md') or path.name.startswith('INTERNAL_'):
-  errors.append('non-public document included: '+path.name)
+# The manifest is an allowlist; unlisted files are rejected above.
 for file in ['REPRODUCIBILITY/exact_m2_certificate/certified_BKM_tight.py',
              'REPRODUCIBILITY/exact_m2_certificate/final_error_budget.py']:
  path=R/file
@@ -83,6 +77,6 @@ if errors:
  print('FAILED PUBLIC RELEASE CHECK:')
  for error in errors[:50]:print(' -',error)
  sys.exit(1)
-print('PASS: clean public scientific content; required proofs and code present; two original inputs match SHA256')
+print('PASS: clean public scientific content; required proofs and code present; both canonical inputs match SHA256')
 print('PASS: all',len(m['files']),'manifest entries and SHA256SUMS checked')
 print('Source and manifest integrity verified')

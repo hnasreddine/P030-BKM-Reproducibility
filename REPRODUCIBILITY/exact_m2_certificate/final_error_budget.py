@@ -1,5 +1,5 @@
 """Conservative, reproducible all-link error budget for the exactly orthogonal
-P030 m=2 bath, N=8500, lambda=.05, c=5. Uses previously proved DD local bound;
+P030 m=2 bath, N=8500, lambda=.05, c=5. Uses the proved DD local bound;
 checks concrete re-run residuals, parser checks, printing error, and Bessel budget.
 Output is conditional on the soundness of the imported analytic and DD proofs.
 """
@@ -26,7 +26,7 @@ for row in rows:
   Eprint2+=err**2
 assert Eprint2<fra('1.3e-24')**2
 print('printed_decimal_output_vs_exact_binary64_DD_frobenius_lt_1.3e-24 PASS')
-# The input stores 12,866 Bessel coefficients, unchanged between original and ideal p.
+# The input stores 12,866 Bessel coefficients, used for both SVD-rounded and exact-moment p.
 with (P/'input_005_5_8500_ideal_m2.txt').open() as f:
  h=f.readline().split();N=int(h[0]);K=int(h[1]);assert N==8500 and K==12865
  for _ in range(N):f.readline()

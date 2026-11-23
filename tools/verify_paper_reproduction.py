@@ -39,13 +39,13 @@ def validate_science():
     n2=json.loads((DATA/'testN2_micro.json').read_text())
     m2=json.loads(HP.read_text())
     assert len([x for x in ep if x['c']==2.2 and x['tag']=='EP'])==5
-    # Historical rounded-SVD bath, deliberately not the exact-bath certificate.
+    # Rounded-SVD bath, deliberately not the exact-bath certificate.
     exact_grid1=datum(m2,lam=0.05,c=5,N=8500)
     exact_grid2=datum(m2,lam=0.05,c=5,N=10500)
     a=Decimal(exact_grid1['F_micro']);b=Decimal(exact_grid2['F_micro'])
     grid_rel=abs(a-b)/a
     assert grid_rel<Decimal('2e-14'),grid_rel
-    # Historical m=2 point differs from separately certified exact orthogonal bath.
+    # Rounded-SVD m=2 point differs from separately certified exact orthogonal bath.
     assert abs(a-Decimal('3.96903554965836e-41'))/a>Decimal('1e-10')
     rows=n2['rows']
     assert len([x for x in rows if x['lam']==0.035])>=3
@@ -53,7 +53,7 @@ def validate_science():
     sel=[x for x in rows if x['lam']==0.035]
     unresolved=[x for x in sel if not ((x['err_pole']/x['fast_amp'])**2*x['pI']['F_fast']/x['pI']['F_slow']<1e-3)]
     assert len(unresolved)==4, len(unresolved)
-    print('PASS: source-data point mapping, historical-vs-exact distinction, grid convergence, unresolved-point masking')
+    print('PASS: source-data point mapping, rounded-SVD vs exact-moment distinction, grid convergence, unresolved-point masking')
 
 
 def main():
@@ -76,6 +76,7 @@ def main():
         shutil.copy2(DATA/'testC_EP.json',data/'testC_EP.json')
         shutil.copy2(DATA/'testN2_micro.json',data/'testN2_micro.json')
         shutil.copy2(HP,hp/'direct_m2_results.json')
+        shutil.copy2(ROOT/'REPRODUCIBILITY'/'order2_high_precision'/'testB_poly_m2.json',hp/'testB_poly_m2.json')
         shutil.copy2(REF,ref/'published_table_rows.json')
         f=data/'testN2_micro.json';d=json.loads(f.read_text())
         point=next(x for x in d['rows'] if x['lam']==0.035 and x['c']==1.0)
@@ -84,6 +85,19 @@ def main():
         bad=subprocess.run([sys.executable,str(code/'make_tables.py'),'--check','--output-dir',str(output/'bad')],cwd=temp,capture_output=True,text=True)
         assert bad.returncode!=0 and 'diverge' in bad.stderr,'A corrupted source was not detected'
         print('PASS: injected numerical corruption is rejected by the publication-data gate')
+        # Mutation of the fitted-resonance prediction must be detected as well,
+        # independently of corruption of the recorded microscopic value.
+        shutil.copy2(DATA/'testN2_micro.json',data/'testN2_micro.json')
+        fitted=hp/'testB_poly_m2.json';fitted_data=json.loads(fitted.read_text())
+        row=datum(fitted_data,lam=0.05,c=5)
+        row['F_ren']*=1.5
+        fitted.write_text(json.dumps(fitted_data))
+        bad_ren=subprocess.run([sys.executable,str(code/'make_tables.py'),'--check',
+                                '--output-dir',str(output/'bad_ren')],
+                                cwd=temp,capture_output=True,text=True)
+        assert bad_ren.returncode!=0 and 'diverge' in bad_ren.stderr, \
+               'A corrupted corrected-resonance prediction was not detected'
+        print('PASS: injected F_ren prediction corruption is rejected by the publication-data gate')
         for script,name in [('make_figures.py','fig_thresholds.pdf'),('make_figure_nonnormal.py','fig_nonnormal.pdf')]:
             dest=output/'figures'/name
             print(run([sys.executable,str(CODE/script),'--output',str(dest)],cwd=temp).strip())

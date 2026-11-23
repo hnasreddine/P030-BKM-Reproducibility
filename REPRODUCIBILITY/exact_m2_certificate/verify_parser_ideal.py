@@ -1,5 +1,5 @@
-"""Exact-rational audit of all recorded decimal->DD input conversions.
-Requires the same libquadmath C++ parser as the original source; no MPFR assumptions.
+"""Exact-rational verification of all recorded decimal->DD input conversions.
+Requires the same libquadmath C++ parser as the supplied source; no MPFR assumptions.
 """
 from pathlib import Path
 from fractions import Fraction
